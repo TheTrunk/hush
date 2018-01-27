@@ -16,6 +16,9 @@ echo "rpcpassword=`head -c 32 /dev/urandom | base64`" >>~/.hush/hush.conf
 echo "addnode=node.myhush.network" >> ~/.hush/hush.conf
 echo "addnode=mmc01.madbuda.me" >> ~/.hush/hush.conf
 echo "addnode=zdash.suprnova.cc" >> ~/.hush/hush.conf
+echo "addnode=explorer.myhush.org" >> ~/.hush/hush.conf
+echo "addnode=hushipv4.matthewreichardt.com" >> ~/.hush/hush.conf
+echo "addnode=stilgar.leto.net" >> ~/.hush/hush.conf
 ```
 
 ## Download proving key
@@ -52,6 +55,8 @@ distributions. For best results it is recommended to use Ubuntu Linux 16.04
 or later.
 
 Build HUSH along with most dependencies from source by running
+
+#### For Linux 
 Get dependencies:
 ```{r, engine='bash'}
 
@@ -63,8 +68,19 @@ sudo apt-get install \
 
 Make sure to create a HUSH configuration file as described above.
 
+#### For Windows
+Get dependencies:
+```{r, engine='bash'}
+sudo apt-get install \
+      build-essential pkg-config libc6-dev m4 g++-multilib \
+      autoconf libtool ncurses-dev unzip git python \
+      zlib1g-dev wget bsdmainutils automake mingw-w64
+```
+Additionally curl, cmake are required.
+
 ## Downloading Git source repo, building and running Hush
 
+#### For Linux
 ```{r, engine='bash'}
 # pull
 git clone https://github.com/MyHush/hush.git
@@ -76,6 +92,18 @@ cd hush
 # Run a HUSH node
 ./src/hushd
 ```
+
+#### For Windows
+```{r, engine='bash'}
+# pull
+git clone https://github.com/MyHush/hush.git
+cd hush
+# fetch key
+./zcutil/fetch-params.sh
+# Build
+./zcutil/build-win.sh -j$(nproc)
+```
+The exe files will save to `src` which you can then move to a windows machine.
 
 ## Supported Platforms
 
